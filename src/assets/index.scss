@@ -1,0 +1,17 @@
+html, body {
+  background-color: white;
+  font-family: Manrope !important;
+}
+
+#root {
+  min-height: 100vh;
+  padding-top: 56px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+@import "navbar/navbar";
+@import "menu/menu";
+@import "card/card";
