@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Container, Alert} from "react-bootstrap";
 import shedule from './shedule.json';
+import './style.css';
 
 export function Shedule() {
 	const startDate = new Date(2020, 7, 31);
@@ -8,7 +9,6 @@ export function Shedule() {
 	const [date, setDate] = useState(new Date(+new Date() + 24 * 60 * 60 * 1000 * (now.getTime() > 17 ? 1 : 0)));
 	const weekDay = date.getDay();
 	const weekNum = parseInt((date.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000) + 1);
-	console.log(weekNum);
 
 	function uppercase(string)
 	{
@@ -38,10 +38,10 @@ export function Shedule() {
 	function DateButtons({}) {
 		return (
 			<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 25}}>
-				<div style={{color: '#007bff'}} onClick={() => setDate(new Date(date.getTime() -  (weekDay == '0' ? '48' : '24') * 60 * 60 * 1000))}>
+				<div className="h-button" style={{color: '#007bff'}} onClick={() => setDate(new Date(date.getTime() -  (weekDay == '1' ? '48' : '24') * 60 * 60 * 1000))}>
 					День назад
 				</div>
-				<div style={{color: '#007bff'}} onClick={() => setDate(new Date(date.getTime() + (weekDay == '6' ? '48' : '24') * 60 * 60 * 1000))}>
+				<div className="h-button" style={{color: '#007bff'}} onClick={() => setDate(new Date(date.getTime() + (weekDay == '6' ? '48' : '24') * 60 * 60 * 1000))}>
 					День вперед
 				</div>
 			</div>
@@ -51,11 +51,11 @@ export function Shedule() {
 	function DateWithButtons() {
 		return (
 			<div>
+				<p style={{marginBottom: 0}}>{date.toDateString() === new Date().toDateString() && 'Сегодня,'} <b>{weekNum % 2 == 1 ? 'нечетная' : 'четная'}</b> неделя</p>
 				<h2>
 					{uppercase(new Date(date).toLocaleString('ru', {month: 'long',day: 'numeric', weekday: 'long'}))}
 				</h2>
 				<DateButtons />
-				<p>{date.toDateString() === new Date().toDateString() && 'Сегодня,'} <b>{weekNum % 2 == 1 ? 'нечетная' : 'четная'}</b> неделя</p>
 			</div>
 		)
 	}
